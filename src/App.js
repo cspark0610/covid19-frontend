@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Container } from '@material-ui/core';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Auth from './components/Auth/Auth';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const user = JSON.parse(localStorage.getItem('profile'));
+
+	return (
+		<BrowserRouter>
+			<Container maxWidth="xl">
+				<Navbar />
+				<Switch>
+					<Route path="/" exact component={() => <Redirect to="/posts/statistics" />} />
+
+					<Route path="/posts/statistics" exact component={Home} />
+					<Route path="/auth" exact component={Auth} />
+
+					{/* <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/posts/statistics" />)} /> */}
+				</Switch>
+			</Container>
+		</BrowserRouter>
+	);
+};
 
 export default App;
