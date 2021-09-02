@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPostsByContinent } from '../../actions/posts';
 import Chart from '../Chart/Chart';
 
-const Continents = ({ data }) => {
+const Continents = () => {
 	const dispatch = useDispatch();
 	const showData = useSelector((state) => state.posts.posts);
 	const [selectedContinent, setSelectedContinent] = useState('');
@@ -13,7 +13,7 @@ const Continents = ({ data }) => {
 		setSelectedContinent(e.target.value);
 	};
 	useEffect(() => {
-		console.log(selectedContinent);
+		//console.log(selectedContinent);
 		dispatch(getPostsByContinent(selectedContinent));
 	}, [dispatch, selectedContinent]);
 
@@ -40,12 +40,12 @@ const Continents = ({ data }) => {
 			<FormControl className={styles.formControl}>
 				<NativeSelect defaultValue="" onChange={(e) => handleCountryChange(e)}>
 					<option value="">Select Continent</option>
-					{data &&
-						data.map((item, i) => (
-							<option key={i} value={item.continent}>
-								{item.continent}
-							</option>
-						))}
+					<option value="Africa">Africa</option>
+					<option value="Asia">Asia</option>
+					<option value="Europe">Europe</option>
+					<option value="North-America">North-America</option>
+					<option value="Oceania">Oceania</option>
+					<option value="South-America">South-America</option>
 				</NativeSelect>
 			</FormControl>
 
