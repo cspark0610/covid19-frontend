@@ -8,7 +8,7 @@ const Chart = ({ totalInfected, totalRecovered, totalDead }) => {
 		<div className={styles.container}>
 			<Bar
 				data={{
-					labels: ['Infected', 'Recovered', 'Deaths'],
+					labels: [`Infected: ${totalInfected}`, `Recovered: ${totalRecovered}`, `Dead: ${totalDead}`],
 					datasets: [
 						{
 							label: 'People',
