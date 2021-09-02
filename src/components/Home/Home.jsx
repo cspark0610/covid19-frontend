@@ -5,6 +5,7 @@ import { getPosts, getPostsByContinent } from '../../actions/posts';
 import Info from '../Cards/Cards';
 
 import CountryPicker from '../CountryPicker/CountryPicker';
+import ContinentPicker from '../ContinentPicker/ContinentPicker';
 
 const Home = () => {
 	//const [currentId, setCurrentId] = useState(null);
@@ -25,6 +26,8 @@ const Home = () => {
 				</Grid>
 				<br />
 				<CountryPicker data={dataPosts.message} />
+				<br />
+				<ContinentPicker data={dataPosts.message} />	
 			</Container>
 		</Grow>
 	);
