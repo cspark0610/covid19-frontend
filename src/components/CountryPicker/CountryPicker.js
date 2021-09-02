@@ -1,33 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { NativeSelect, FormControl } from '@material-ui/core';
+import { NativeSelect, FormControl, Typography } from '@material-ui/core';
 import styles from './CountryPicker.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPostsBySearch } from '../../actions/posts';
+import Chart from '../Chart/Chart';
 
 const Countries = ({ data }) => {
 	const dispatch = useDispatch();
-	const [country, setCountry] = useState('');
+	const showData = useSelector((state) => state.posts.posts);
+	const [selectedCountry, setSelectedCountry] = useState('');
 	const handleCountryChange = (e) => {
-		setCountry(e.target.value);
-		//console.log(country);
-
-		//dispatch(getPostsBySearch('Laos')); working
-		dispatch(getPostsBySearch(country));
+		setSelectedCountry(e.target.value);
 	};
-	//see why onCHange event is not triggered in NativeSelect material-ui tag
+	useEffect(() => {
+		console.log(selectedCountry);
+		dispatch(getPostsBySearch(selectedCountry));
+	}, [dispatch, selectedCountry]);
+
+	const showDataCases = showData ? JSON.parse(showData['0'].cases) : { active: 0, critical: 0 };
+	const showDataDeaths = showData ? JSON.parse(showData['0'].deaths) : { total: 0 };
+
+	const totalInfected = showDataCases.active + showDataCases.critical;
+	const totalRecovered = showDataCases.recovered;
+	const totalDead = showDataDeaths.total;
+
 	return (
-		<FormControl className={styles.formControl}>
-			<NativeSelect defaultValue="" onChange={(e) => handleCountryChange(e)}>
-				<option value="">Select Country</option>
-				{data &&
-					data.map((item, i) => (
-						<option key={i} value={country}>
-							{item.country}
-						</option>
-					))}
-			</NativeSelect>
-		</FormControl>
+		<>
+			<Typography gutterBottom variant="h4" component="h2">
+				Pick a Country
+			</Typography>
+			<FormControl className={styles.formControl}>
+				<NativeSelect defaultValue="" onChange={(e) => handleCountryChange(e)}>
+					<option value="">Select Country</option>
+					{data &&
+						data.map((item, i) => (
+							<option key={i} value={item.country}>
+								{item.country}
+							</option>
+						))}
+				</NativeSelect>
+			</FormControl>
+
+			<br />
+			<br />
+			<Chart totalInfected={totalInfected} totalRecovered={totalRecovered} totalDead={totalDead} />
+		</>
 	);
 };
 
 export default Countries;
+
