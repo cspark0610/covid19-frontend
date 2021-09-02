@@ -16,7 +16,7 @@ const Home = () => {
 		dispatch(getPosts());
 	}, [dispatch]);
 
-	console.log('data', dataPosts.message);
+	//console.log('data', dataPosts.message);
 
 	return (
 		<Grow in>
@@ -27,7 +27,7 @@ const Home = () => {
 				<br />
 				<CountryPicker data={dataPosts.message} />
 				<br />
-				<ContinentPicker data={dataPosts.message} />	
+				<ContinentPicker />	
 			</Container>
 		</Grow>
 	);
