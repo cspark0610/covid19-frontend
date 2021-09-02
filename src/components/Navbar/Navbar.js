@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-//import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 //import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
+import { synchronize } from '../../actions/posts';
 
 const Navbar = () => {
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-	//const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const location = useLocation();
 	const history = useHistory();
 	const classes = useStyles();
@@ -30,6 +31,9 @@ const Navbar = () => {
 
 		setUser(JSON.parse(localStorage.getItem('profile')));
 	}, [location]);
+	const handleClick = () => {
+		dispatch(synchronize());
+	};
 
 	return (
 		<AppBar className={classes.appBar} position="static" color="inherit">
@@ -50,7 +54,11 @@ const Navbar = () => {
 					<Button component={Link} to="/auth" variant="contained" color="primary">
 						Login
 					</Button>
+					
 				)}
+					<Button variant="contained" color="secondary" onClick={handleClick}>
+						Synchronize
+					</Button>
 			</Toolbar>
 		</AppBar>
 	);
