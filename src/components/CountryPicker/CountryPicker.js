@@ -13,8 +13,10 @@ const Countries = ({ data }) => {
 		setSelectedCountry(e.target.value);
 	};
 	useEffect(() => {
-		console.log(selectedCountry);
-		dispatch(getPostsBySearch(selectedCountry));
+		//console.log(selectedCountry);
+		if (selectedCountry) {
+			dispatch(getPostsBySearch(selectedCountry));
+		}
 	}, [dispatch, selectedCountry]);
 
 	const showDataCases = showData ? JSON.parse(showData['0'].cases) : { active: 0, critical: 0 };
