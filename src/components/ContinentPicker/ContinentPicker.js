@@ -14,7 +14,9 @@ const Continents = () => {
 	};
 	useEffect(() => {
 		//console.log(selectedContinent);
-		dispatch(getPostsByContinent(selectedContinent));
+		if (selectedContinent) {
+			dispatch(getPostsByContinent(selectedContinent));
+		}
 	}, [dispatch, selectedContinent]);
 
 	//console.log('showdata en continent', showData);
