@@ -1,3 +1,9 @@
+1. rm -r package-lock.json node_modules (remove package-lock.json to avoid proxy problems)
+2. npm install
+3. npm start
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
