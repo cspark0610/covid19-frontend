@@ -1,6 +1,10 @@
 1. rm -r package-lock.json node_modules (remove package-lock.json to avoid proxy problems)
 2. npm install
 3. npm start
+4. routes: 
+/posts/statistics
+/posts/sync
+/auth
 
 
 
