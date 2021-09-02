@@ -4,7 +4,16 @@ import { FETCH_ALL, FETCH_BY_SEARCH } from '../constants/actionTypes';
 export const getPosts = () => async (dispatch) => {
 	try {
 		const { data } = await api.fetchPosts();
-		//console.log('data in posts.actions', data);
+	
+		dispatch({ type: FETCH_ALL, payload: data });
+	} catch (error) {
+		console.log(error);
+	}
+};
+export const synchronize = () => async (dispatch) => {
+	try {
+		const { data } = await api.syncPosts();
+		
 		dispatch({ type: FETCH_ALL, payload: data });
 	} catch (error) {
 		console.log(error);
