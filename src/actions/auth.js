@@ -5,7 +5,7 @@ import * as api from '../api/index.js';
 export const login = (formData, router) => async (dispatch) => {
 	try {
 		const { data } = await api.login(formData);
-		//console.log('data in action auth.js', dataUser);
+		//console.log('data in action auth.js', data);
 		router.push('/posts/statistics');
 		dispatch({ type: AUTH, payload: data });
 		
