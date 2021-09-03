@@ -24,18 +24,18 @@ const Continents = () => {
 	let totalRecovered = showData?.reduce((acc, item) => {
 		let obj = JSON.parse(item.cases);
 		return acc + obj.recovered;
-	}, 0);
+	}, 0) || 0;
 	let totalInfected = showData?.reduce((acc, item) => {
 		let obj = JSON.parse(item.cases);
 		return acc + obj.active;
-	}, 0);
+	}, 0) || 0;
 	let totalDead = showData?.reduce((acc, item) => {
 		let obj = JSON.parse(item.deaths);
 		return acc + obj.total;
-	}, 0);
+	}, 0) || 0;
 
 	return (
-		<>
+
 			<Typography gutterBottom variant="h4" component="h2">
 				Pick a Continent
 			</Typography>
