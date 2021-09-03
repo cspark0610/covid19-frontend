@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Grow, Container, Grid } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Grow, Container, Grid, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPosts, getPostsByContinent } from '../../actions/posts';
+import { getPosts } from '../../actions/posts';
 import Info from '../Cards/Cards';
 
 import CountryPicker from '../CountryPicker/CountryPicker';
 import ContinentPicker from '../ContinentPicker/ContinentPicker';
+import { synchronize } from '../../actions/posts';
 
 const Home = () => {
 	//const [currentId, setCurrentId] = useState(null);
@@ -16,21 +17,31 @@ const Home = () => {
 		dispatch(getPosts());
 	}, [dispatch]);
 
-	//console.log('data', dataPosts.message);
+	const handleClick = () => {
+		dispatch(synchronize());
+	};
+
+	console.log('data', dataPosts.message);
 
 	return (
-		<Grow in>
-			<Container>
-				<Grid container justify="space-between" alignItems="stretch" spacing={3}>
-					<Info data={dataPosts.message} />
-				</Grid>
-				<br />
-				<CountryPicker data={dataPosts.message} />
-				<br />
-				<ContinentPicker />	
-			</Container>
-		</Grow>
+		<>
+			<Button variant="contained" color="secondary" onClick={handleClick}>
+				Synchronize
+			</Button>
+			<Grow in>
+				<Container>
+					<Grid container justify="space-between" alignItems="stretch" spacing={3}>
+						<Info data={dataPosts.message} />
+					</Grid>
+					<br />
+					<CountryPicker data={dataPosts.message} />
+					<br />
+					<ContinentPicker />
+				</Container>
+			</Grow>
+		</>
 	);
 };
 
 export default Home;
+
