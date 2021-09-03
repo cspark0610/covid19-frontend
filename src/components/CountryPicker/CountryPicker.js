@@ -19,7 +19,7 @@ const Countries = ({ data }) => {
 		}
 	}, [dispatch, selectedCountry]);
 
-	const showDataCases = showData ? JSON.parse(showData['0'].cases) : { active: 0, critical: 0 };
+	const showDataCases = showData ? JSON.parse(showData['0'].cases) : { active: 0, recovered:0, critical: 0 };
 	const showDataDeaths = showData ? JSON.parse(showData['0'].deaths) : { total: 0 };
 
 	const totalInfected = showDataCases.active + showDataCases.critical;
