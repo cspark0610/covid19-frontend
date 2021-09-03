@@ -35,7 +35,7 @@ const Continents = () => {
 	}, 0) || 0;
 
 	return (
-
+		<>
 			<Typography gutterBottom variant="h4" component="h2">
 				Pick a Continent
 			</Typography>
